@@ -110,8 +110,9 @@ export function SessionConfigTester() {
 
   const handleCopyJson = () => {
     if (selectedConfig) {
-      const { name, description, tags, lastUpdated, ...configData } = selectedConfig
-      navigator.clipboard.writeText(JSON.stringify(configData, null, 2))
+      const { ...configData } = selectedConfig
+      const validatedConfig = createSessionRequestSchema.parse(configData)
+      navigator.clipboard.writeText(JSON.stringify(validatedConfig, null, 2))
     }
   }
 
@@ -202,4 +203,3 @@ export function SessionConfigTester() {
     </div>
   )
 }
-
